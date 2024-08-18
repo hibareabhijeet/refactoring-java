@@ -1,6 +1,7 @@
 package com.tech.refactoring.code.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import com.tech.refactoring.code.model.Customer;
 import com.tech.refactoring.code.model.MovieRental;
@@ -16,8 +17,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,10 +38,10 @@ class RentalControllerTest {
         String expected = "Rental Record for Abhi\n"
                 +"Amount owed is 0.0\n"
                 +"You earned 0 frequent points\n";
-        when(rentalInfoService.statement(any(Customer.class))).thenReturn(expected);
+        when(rentalInfoService.getStatement(any(Customer.class))).thenReturn(expected);
         Customer customer = new Customer("Abhi",new ArrayList<MovieRental>());
 
-        ResponseEntity<String> responseEntity = rentalController.statement(customer);
+        ResponseEntity<String> responseEntity = rentalController.getStatement(customer);
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         assertThat(responseEntity.getBody()).isEqualTo(expected);
     }

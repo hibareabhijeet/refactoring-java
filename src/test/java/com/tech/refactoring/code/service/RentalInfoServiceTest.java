@@ -5,7 +5,6 @@ import com.tech.refactoring.code.model.MovieRental;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +24,7 @@ class RentalInfoServiceTest {
         String expected = "Rental Record for Abhi\n"
                 +"Amount owed is 0.0\n"
                 +"You earned 0 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -40,7 +39,7 @@ class RentalInfoServiceTest {
                 "\tMatrix\t2.0\n" +
                 "Amount owed is 5.5\n" +
                 "You earned 2 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -53,7 +52,7 @@ class RentalInfoServiceTest {
                 "\tMatrix\t2.0\n" +
                 "Amount owed is 2.0\n" +
                 "You earned 1 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -66,7 +65,7 @@ class RentalInfoServiceTest {
                 "\tCars\t6.0\n" +
                 "Amount owed is 6.0\n" +
                 "You earned 1 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -79,7 +78,7 @@ class RentalInfoServiceTest {
                 "\tFast & Furious X\t3.0\n" +
                 "Amount owed is 3.0\n" +
                 "You earned 1 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -94,7 +93,7 @@ class RentalInfoServiceTest {
                 "\tCars\t1.5\n" +
                 "Amount owed is 5.0\n" +
                 "You earned 2 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 
     @Test
@@ -107,6 +106,6 @@ class RentalInfoServiceTest {
                 "\tFast & Furious X\t12.0\n" +
                 "Amount owed is 12.0\n" +
                 "You earned 2 frequent points\n";
-        assertEquals(expected,rentalInfoService.statement(customer));
+        assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 }
