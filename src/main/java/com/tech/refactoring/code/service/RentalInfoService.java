@@ -2,7 +2,6 @@ package com.tech.refactoring.code.service;
 
 import com.tech.refactoring.code.model.Customer;
 import com.tech.refactoring.code.model.MovieRental;
-import com.tech.refactoring.code.util.Constants;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +18,7 @@ public class RentalInfoService {
             frequentEnterPoints += rental.getTotalFrequentsPoints();
 
             //print figures for this rental
-            result.append( "\t" + Constants.movies.get(rental.getMovieId()).getTitle() + "\t" + thisAmount + "\n");
+            result.append( "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n");
             totalAmount = totalAmount + thisAmount;
         }
         // add footer lines

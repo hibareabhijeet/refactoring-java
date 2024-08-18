@@ -1,6 +1,7 @@
 package com.tech.refactoring.code.service;
 
 import com.tech.refactoring.code.model.Customer;
+import com.tech.refactoring.code.model.Movie;
 import com.tech.refactoring.code.model.MovieRental;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.tech.refactoring.code.util.MovieCodes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -30,8 +32,8 @@ class RentalInfoServiceTest {
     @Test
     public void testAddTwoRegularMovies() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F001", 3),
-                        new MovieRental("F002", 1))
+                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
+                        new MovieRental(new Movie("Matrix", REGULAR), 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -45,7 +47,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneRegularMovies() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F002", 1))
+                Arrays.asList(new MovieRental(new Movie("Matrix", REGULAR), 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -58,7 +60,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneChildrenMovies() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F003", 6))
+                Arrays.asList(new MovieRental(new Movie("Cars", CHILDRENS), 6))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -71,7 +73,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneNewMovies() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F004", 1))
+                Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -84,8 +86,8 @@ class RentalInfoServiceTest {
     @Test
     public void testAddTwoMixMovies() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F001", 3),
-                        new MovieRental("F003", 2))
+                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
+                        new MovieRental(new Movie("Cars", CHILDRENS), 2))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -99,7 +101,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneNewMoviesWithBonus() {
         List<MovieRental> inputMovieRental = new ArrayList<>(
-                Arrays.asList(new MovieRental("F004", 4))
+                Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 4))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +

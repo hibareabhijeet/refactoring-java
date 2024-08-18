@@ -1,19 +1,19 @@
 package com.tech.refactoring.code.model;
 
-import static com.tech.refactoring.code.util.Constants.movies;
 import static com.tech.refactoring.code.util.MovieCodes.NEW_RELEASE;
 
+
 public class MovieRental {
-    private String movieId;
+    private Movie movie;
     private int days;
 
-    public MovieRental(String movieId, int days) {
-        this.movieId = movieId;
+    public MovieRental(Movie movie, int days) {
+        this.movie = movie;
         this.days = days;
     }
 
-    public String getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
     public int getDays() {
@@ -21,10 +21,14 @@ public class MovieRental {
     }
 
 
+    /**
+     * determine amount for each movie
+     * @return Amount for individual movie
+     */
     public double calculateAmount(){
-        // determine amount for each movie
+
         double thisAmount = 0;
-        switch(movies.get(getMovieId()).getCode()){
+        switch(getMovie().getCode()){
             case REGULAR:
                 thisAmount = 2;
                 if (getDays() > 2) {
@@ -44,12 +48,14 @@ public class MovieRental {
         return thisAmount;
     }
 
+    /**
+     * add frequent bonus points
+     * @return frequentEnterPoints
+     */
     public int getTotalFrequentsPoints(){
         int frequentEnterPoints = 1;
-        //add frequent bonus points
-//        frequentEnterPoints++;
         // add bonus for a two day new release rental
-        if (movies.get(getMovieId()).getCode().equals(NEW_RELEASE) && getDays() > 2) {frequentEnterPoints++;}
+        if (getMovie().getCode().equals(NEW_RELEASE) && getDays() > 2) {frequentEnterPoints++;}
 
         return frequentEnterPoints;
     }
