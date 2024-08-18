@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -18,6 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -39,10 +42,10 @@ class RentalControllerTest {
                 +"Amount owed is 0.0\n"
                 +"You earned 0 frequent points\n";
         when(rentalInfoService.getStatement(any(Customer.class))).thenReturn(expected);
-        Customer customer = new Customer("Abhi",new ArrayList<MovieRental>());
+        Customer customer = new Customer("Abhi",new HashSet<MovieRental>());
 
         ResponseEntity<String> responseEntity = rentalController.getStatement(customer);
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isEqualTo(expected);
     }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "C. U. Stomer",
+  "rentals": [
+    {
+      "movie": {
+        "title": "You've Got Mail",
+        "category": "REGULAR"
+      },
+      "days": 3
+    },
+    {
+      "movie": {
+        "title": "Matrix",
+        "category": "REGULAR"
+      },
+      "days": 1
+    }
+  ]
+}

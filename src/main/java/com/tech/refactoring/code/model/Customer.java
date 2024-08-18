@@ -1,21 +1,13 @@
 package com.tech.refactoring.code.model;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
 public class Customer {
     private String name;
-    private List<MovieRental> rentals;
-
-    public Customer(String name, List<MovieRental> rentals) {
-        this.name = name;
-        this.rentals = rentals;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<MovieRental> getRentals() {
-        return rentals;
-    }
+    private Set<MovieRental> rentals;
 }

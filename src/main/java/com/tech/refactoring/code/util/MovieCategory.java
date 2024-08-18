@@ -1,6 +1,6 @@
 package com.tech.refactoring.code.util;
 
-public enum MovieCodes {
+public enum MovieCategory {
     CHILDRENS,
     REGULAR,
     NEW_RELEASE

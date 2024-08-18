@@ -1,22 +1,12 @@
 package com.tech.refactoring.code.model;
 
-import com.tech.refactoring.code.util.MovieCodes;
+import com.tech.refactoring.code.util.MovieCategory;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class Movie {
     private String title;
-    private MovieCodes code;
-
-    public Movie(String title, MovieCodes code) {
-        this.title = title;
-        this.code = code;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public MovieCodes getCode() {
-        return code;
-    }
-
+    private MovieCategory category;
 }

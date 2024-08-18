@@ -7,11 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import static com.tech.refactoring.code.util.MovieCodes.*;
+import static com.tech.refactoring.code.util.MovieCategory.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -22,7 +20,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testCustomerWithEmptyRentals() {
-        Customer customer = new Customer("Abhi",new ArrayList<MovieRental>());
+        Customer customer = new Customer("Abhi",new LinkedHashSet<>());
         String expected = "Rental Record for Abhi\n"
                 +"Amount owed is 0.0\n"
                 +"You earned 0 frequent points\n";
@@ -31,7 +29,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddTwoRegularMovies() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
                         new MovieRental(new Movie("Matrix", REGULAR), 1))
         );
@@ -46,7 +44,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddOneRegularMovies() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("Matrix", REGULAR), 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
@@ -59,7 +57,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddOneChildrenMovies() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("Cars", CHILDRENS), 6))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
@@ -72,7 +70,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddOneNewMovies() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
@@ -85,7 +83,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddTwoMixMovies() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
                         new MovieRental(new Movie("Cars", CHILDRENS), 2))
         );
@@ -100,7 +98,7 @@ class RentalInfoServiceTest {
 
     @Test
     public void testAddOneNewMoviesWithBonus() {
-        List<MovieRental> inputMovieRental = new ArrayList<>(
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
                 Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 4))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
