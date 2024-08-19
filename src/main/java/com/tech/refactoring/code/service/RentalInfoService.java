@@ -1,14 +1,18 @@
 package com.tech.refactoring.code.service;
 
 import com.tech.refactoring.code.model.Customer;
+import com.tech.refactoring.code.model.Movie;
 import com.tech.refactoring.code.model.MovieRental;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.tech.refactoring.code.util.Constants.movies;
 import static com.tech.refactoring.code.util.MovieCategory.*;
 
+@Slf4j
 @Service
 public class RentalInfoService {
 
@@ -23,13 +27,20 @@ public class RentalInfoService {
         StringBuffer result = new StringBuffer("Rental Record for " + customer.getName() + "\n");
 
         customer.getRentals().stream().forEach( rental -> {
+            Movie movie = movies.get(rental.getMovieId());
+            if(movie != null){
             double thisAmount = calculateAmount(rental);
 
             frequentEnterPoints.addAndGet(getTotalFrequentsPoints(rental));
 
             //print figures for this rental
-            result.append( "\t" + rental.getMovie().getTitle() + "\t" + thisAmount + "\n");
+            result.append( "\t" + movie.getTitle() + "\t" + thisAmount + "\n");
             totalAmount.set(totalAmount.get() + thisAmount);
+
+
+            }else{
+                result.append( "\t" + "Invalid MovieId " + rental.getMovieId() + "\n");
+            }
         });
 
         // add footer lines
@@ -47,7 +58,7 @@ public class RentalInfoService {
     private double calculateAmount(MovieRental movieRentalDetails){
 
         double thisAmount = 0;
-        switch(movieRentalDetails.getMovie().getCategory()){
+        switch(movies.get(movieRentalDetails.getMovieId()).getCategory()){
             case REGULAR:
                 thisAmount = 2;
                 if (movieRentalDetails.getDays() > 2) {
@@ -72,9 +83,10 @@ public class RentalInfoService {
      * @return frequentEnterPoints
      */
     private int getTotalFrequentsPoints(MovieRental movieRentalDetails){
-        int frequentEnterPoints = 1;
+        int frequentEnterPoints = 0;
+        frequentEnterPoints++;
         // add bonus for a two day new release rental
-        if (movieRentalDetails.getMovie().getCategory().equals(NEW_RELEASE) && movieRentalDetails.getDays() > 2) {frequentEnterPoints++;}
+        if (movies.get(movieRentalDetails.getMovieId()).getCategory().equals(NEW_RELEASE) && movieRentalDetails.getDays() > 2) {frequentEnterPoints++;}
 
         return frequentEnterPoints;
     }

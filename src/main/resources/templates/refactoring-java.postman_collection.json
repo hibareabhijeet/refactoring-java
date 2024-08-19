@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "90474a5b-6a7a-47fc-b3c4-52737a5769fe",
+		"name": "refactoring-java",
+		"description": "To provide details insites of Rest API's",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13183959",
+		"_collection_link": "https://martian-station-887375.postman.co/workspace/ikea~23de1968-25a8-4098-ae06-f810cfc82d97/collection/13183959-90474a5b-6a7a-47fc-b3c4-52737a5769fe?action=share&source=collection_link&creator=13183959"
+	},
+	"item": [
+		{
+			"name": "Single-Movie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Abhi Hibare\",\r\n\t\"rentals\": [\r\n\t\t{\r\n\t\t\t\"movieId\": \"F004\",\r\n\t\t\t\"days\": 3\r\n\t\t}\r\n\t]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/rental/statement",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rental",
+						"statement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mix-Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Tom\",\r\n\t\"rentals\": [\r\n\t\t{\r\n\t\t\t\"movieId\": \"F001\",\r\n\t\t\t\"days\": 3\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"movieId\": \"F002\",\r\n\t\t\t\"days\": 5\r\n\t\t}\r\n\t]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/rental/statement",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rental",
+						"statement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid MovieId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Abhi Hibare\",\r\n\t\"rentals\": [\r\n\t\t{\r\n\t\t\t\"movieId\": \"F006\",\r\n\t\t\t\"days\": 3\r\n\t\t}\r\n\t]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/rental/statement",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rental",
+						"statement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bad Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Abhi Hibare\",\r\n\t\"rentals\": [\r\n\t\t\r\n\t]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/rental/statement",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rental",
+						"statement"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

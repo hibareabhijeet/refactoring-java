@@ -8,8 +8,7 @@ Expose an interactive REST API to get rental statements
 
 ### Assumptions
 Change in Request:
-1. Removed movieId from request - If any end user try to get rental statement then with the help of movie-Category 
-        code will calculate the rental amount. It will reduce of maintaining static list of movie and category
+1. Code upgrades to Springboot Rest API
 2. Changed List to Set for Customer - List may contain same movie details twice but set will prevent it.
 3. Creating MovieCategory Enum helps to avoid invalid movie categories 
 
@@ -18,10 +17,12 @@ Change in Request:
 1. Add DB to maintain master data
 2. Implement flyway to maintain DB scripts
 3. Provide CRUD operation for maintaining Movies with its codes
-4. Whiling move this assignment to production level then
-    Implement docker
-    Add github actions to push code from repo to cloud
-    Add terraform configuration to for IaC
+4. Provide CRUD operation for maintaining Customers
+5. If we want to maintain customer history then add rentalId in MovieRental class
+6. Whiling move this assignment to production level then
+    - Implement docker
+    - Add github actions to push code from repo to cloud
+    - Add terraform configuration to for IaC
 
 ### Usage
 
@@ -54,6 +55,12 @@ Change in Request:
 <p>
 
 ###### Request
+```postman
+Import file to postman from src/main/resources/templates/refactoring-java.postman_collection.json
+
+Or
+```
+
 ```curl
 curl --location --request GET 'localhost:8080/api/rental/statement' \
 --header 'Content-Type: application/json' \

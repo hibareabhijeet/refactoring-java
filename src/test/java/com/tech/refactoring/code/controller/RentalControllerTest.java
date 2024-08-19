@@ -1,11 +1,8 @@
 package com.tech.refactoring.code.controller;
 
-import static com.tech.refactoring.code.util.MovieCategory.REGULAR;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import com.tech.refactoring.code.model.Customer;
-import com.tech.refactoring.code.model.Movie;
 import com.tech.refactoring.code.model.MovieRental;
 import com.tech.refactoring.code.service.RentalInfoService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -44,8 +40,8 @@ class RentalControllerTest {
                 "You earned 2 frequent points\n";
         when(rentalInfoService.getStatement(any(Customer.class))).thenReturn(expected);
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
-                        new MovieRental(new Movie("Matrix", REGULAR), 1))
+                Arrays.asList(new MovieRental("F001", 3),
+                        new MovieRental("F002", 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
 
@@ -87,8 +83,8 @@ class RentalControllerTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         String expected = "Request can not complete.";
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
-                        new MovieRental(new Movie("Matrix", REGULAR), 1))
+                Arrays.asList(new MovieRental("F001", 3),
+                        new MovieRental("F002", 1))
         );
         Customer customer = new Customer("",inputMovieRental);
 
@@ -104,8 +100,8 @@ class RentalControllerTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         String expected = "Request can not complete.";
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
-                        new MovieRental(new Movie("Matrix", REGULAR), 1))
+                Arrays.asList(new MovieRental("F001", 3),
+                        new MovieRental("F002", 1))
         );
         Customer customer = new Customer(null,inputMovieRental);
 

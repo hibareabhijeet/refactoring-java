@@ -1,7 +1,6 @@
 package com.tech.refactoring.code.util;
 
 import com.tech.refactoring.code.model.Customer;
-import org.apache.catalina.util.StringUtil;
 
 public class Validation {
 

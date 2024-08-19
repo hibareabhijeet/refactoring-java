@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Movie {
+    private String movieId;
     private String title;
     private MovieCategory category;
 }

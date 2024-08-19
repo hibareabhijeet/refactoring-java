@@ -1,7 +1,6 @@
 package com.tech.refactoring.code.service;
 
 import com.tech.refactoring.code.model.Customer;
-import com.tech.refactoring.code.model.Movie;
 import com.tech.refactoring.code.model.MovieRental;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 
-import static com.tech.refactoring.code.util.MovieCategory.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -30,8 +28,8 @@ class RentalInfoServiceTest {
     @Test
     public void testAddTwoRegularMovies() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
-                        new MovieRental(new Movie("Matrix", REGULAR), 1))
+                Arrays.asList(new MovieRental("F001", 3),
+                        new MovieRental("F002", 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -45,7 +43,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneRegularMovies() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("Matrix", REGULAR), 1))
+                Arrays.asList(new MovieRental("F002", 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -58,7 +56,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneChildrenMovies() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("Cars", CHILDRENS), 6))
+                Arrays.asList(new MovieRental("F003", 6))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -71,7 +69,7 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneNewMovies() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 1))
+                Arrays.asList(new MovieRental("F004", 1))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -84,8 +82,8 @@ class RentalInfoServiceTest {
     @Test
     public void testAddTwoMixMovies() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("You've Got Mail", REGULAR), 3),
-                        new MovieRental(new Movie("Cars", CHILDRENS), 2))
+                Arrays.asList(new MovieRental("F001", 3),
+                        new MovieRental("F003", 2))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
@@ -99,13 +97,26 @@ class RentalInfoServiceTest {
     @Test
     public void testAddOneNewMoviesWithBonus() {
         Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
-                Arrays.asList(new MovieRental(new Movie("Fast & Furious X", NEW_RELEASE), 4))
+                Arrays.asList(new MovieRental("F004", 4))
         );
         Customer customer = new Customer("Abhi",inputMovieRental);
         String expected = "Rental Record for Abhi\n" +
                 "\tFast & Furious X\t12.0\n" +
                 "Amount owed is 12.0\n" +
                 "You earned 2 frequent points\n";
+        assertEquals(expected,rentalInfoService.getStatement(customer));
+    }
+
+    @Test
+    public void testInvalidMovieId() {
+        Set<MovieRental> inputMovieRental = new LinkedHashSet<>(
+                Arrays.asList(new MovieRental("F006", 4))
+        );
+        Customer customer = new Customer("Abhi",inputMovieRental);
+        String expected = "Rental Record for Abhi\n" +
+                "\tInvalid MovieId F006\n" +
+                "Amount owed is 0.0\n" +
+                "You earned 0 frequent points\n";
         assertEquals(expected,rentalInfoService.getStatement(customer));
     }
 }
