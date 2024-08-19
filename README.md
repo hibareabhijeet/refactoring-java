@@ -65,20 +65,14 @@ Or
 curl --location --request GET 'localhost:8080/api/rental/statement' \
 --header 'Content-Type: application/json' \
 --data '{
-	"name": "C. U. Stomer",
+	"name": "Tom",
 	"rentals": [
 		{
-			"movie": {
-				"title": "You'\''ve Got Mail",
-				"category": "REGULAR"
-			},
+			"movieId": "F001",
 			"days": 3
 		},
 		{
-			"movie": {
-				"title": "Matrix",
-				"category": "REGULAR"
-			},
+			"movieId": "F002",
 			"days": 1
 		}
 	]
@@ -90,7 +84,7 @@ curl --location --request GET 'localhost:8080/api/rental/statement' \
 
 ###### Response
 ```
-Rental Record for C. U. Stomer
+Rental Record for Tom
 	You've Got Mail	3.5
 	Matrix	2.0
 Amount owed is 5.5
